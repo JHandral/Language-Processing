@@ -1,0 +1,94 @@
+;1)
+(def abs (fn [x] (Math/sqrt(* x x))))
+
+;2)
+;Error: parameters not listed
+
+(defn take-square [x]
+(* x x))
+
+;Error: used function in parameters x and y where parameters should be defined, can apply ;method to parameters within the method
+
+(defn sum-of-squares [x y]
+(+ (take-square x) (take-square y)))
+
+;3)
+(def exp-13-1 (+ 12 1))
+(def exp-13-2 (+ (* 3 3) 4))
+(def exp-13-3 (+ 10 3))
+(def exp-13-4 (+ (* 2 3) (/ 14 2)))
+  
+;4)
+(defn third [list] (first(rest(rest list))))
+
+;5)
+(defn chain [f g]
+(fn [x] 
+  (f (g x))))
+
+;6)
+(defn last-two [l]
+  (if (== (count l) 2)
+    l
+    (last-two (rest l))))
+
+;7)
+(defn remove-second [l]
+  (cons (first l) (rest (rest l)))
+  )
+
+;8)
+(defn add-to-end [l x]
+  (if (empty? l)
+    (list x)
+   (cons (first l) (add-to-end (rest l) x))))
+
+;9)
+(defn reverse-helper [lst rev-lst]
+  (if (empty? lst)
+    rev-lst
+    (reverse-helper (rest lst) (cons (first lst) rev-lst))))
+
+(defn reverse [lst]
+  (reverse-helper lst '()))
+
+
+;10)
+(defn reverse-nested [list]
+  (map reverse list))
+
+;11)
+ (defn count-to-n [n] (reverse (count-to-1 n)))
+
+;12)
+(defn count-to-1 [n]
+  (let [l '()]
+    (if (= n 1)
+      (cons n l)
+      (cons n (count-to-1 (- n 1)))))) 
+
+;13)
+(defn get-min [lst]
+  (if (empty? (rest lst))
+    (first lst)
+    (let [min-rest (get-min (rest lst))]
+      (if (< (first lst) min-rest)
+        (first lst)
+        min-rest))))
+
+;14)
+(defn greater-than-seven? [lst]
+  (map (fn [x] (> x 7) ) lst))
+
+;15)
+(defn concat-two [x y]
+  (if (empty? x)
+    y
+    (cons (first x) (concat-two (rest x) y))))
+(defn concat-three [x y z]
+  (if (empty? x)
+    (concat-two y z)
+    (cons (first x) (concat-three (rest x) y z))))
+
+
+
